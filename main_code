@@ -1,42 +1,60 @@
+q = []
+a = []
 
+def insert_quiz():
+    print("Insert your quiz (if you're done, type 'n')")
+    while True:
+        quest = input("What is the question? \n>> ")
+        if quest == 'n':
+            break
+        ans = input("What is the answer? \n>> ")
+        q.append(quest)
+        a.append(ans)
+    return
 
-menu =  str(input("""
+def display_quiz():
+    score = 0
+    for i in range(len(q)):
+        print(f"{i+1}. {q[i]}")
+        user_ans = input('What is your answer for this question? (or type "n" to exit): ')
+        if user_ans.lower() == 'n':
+            break
+        if i < len(a):
+            ans = a[i]
+            result = check_ans(user_ans, ans)
+            if result:
+                print("Correct!")
+                score += 1
+            else:
+                print("Incorrect.")
+    print(f"Your score: {score}/{len(q)}")
+    return
+
+def check_ans(user_ans, ans):
+    if user_ans.lower() == ans.lower():
+        return True
+    else:
+        return False
+
+def menu():
+    while True:
+        choice = input("""
 Hi, Welcome to Quizy
 1. Insert Quiz
 2. Start Quiz
 3. Exit
->> """))
+>> """)
+        if choice == '1':
+            insert_quiz()
+        elif choice == '2':
+            if not q:
+                print("No quiz inserted yet. Please insert quizzes first.")
+                continue
+            display_quiz()
+        elif choice == '3':
+            print("Exiting Quizy. Goodbye!")
+            break
+        else:
+            print("Invalid option. Please choose again.")
+menu()
 
-q = ['']
-a = ['']
-
-def insert_quiz():
-  print("Insert your quiz (if you're done, type 'n')")
-  while True:
-    quest = input("What is the question? \n>> ")
-    if quest == 'n':
-      break
-    ans = input("What is the answer? \n>> ")
-    q.append(quest)
-    a.append(ans)
-  return
-
-def display_quiz(q):
-  for i in range(len(q)):
-    print(f"{i+1}")
-  user_ans = input('>> ')
-
-def check_ans(user_ans, ans):
-  score = 0
-  if user_ans.lower() == ans.lower():
-    score += 1
-    return True
-  else:
-    return False
-
-while True:
-  if menu == '1':
-    insert_quiz()
-  elif menu == '2':
-    display_quiz(q)
-    check_ans(user_ans, ans)
