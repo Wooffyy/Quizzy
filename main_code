@@ -1,0 +1,42 @@
+
+
+menu =  str(input("""
+Hi, Welcome to Quizy
+1. Insert Quiz
+2. Start Quiz
+3. Exit
+>> """))
+
+q = ['']
+a = ['']
+
+def insert_quiz():
+  print("Insert your quiz (if you're done, type 'n')")
+  while True:
+    quest = input("What is the question? \n>> ")
+    if quest == 'n':
+      break
+    ans = input("What is the answer? \n>> ")
+    q.append(quest)
+    a.append(ans)
+  return
+
+def display_quiz(q):
+  for i in range(len(q)):
+    print(f"{i+1}")
+  user_ans = input('>> ')
+
+def check_ans(user_ans, ans):
+  score = 0
+  if user_ans.lower() == ans.lower():
+    score += 1
+    return True
+  else:
+    return False
+
+while True:
+  if menu == '1':
+    insert_quiz()
+  elif menu == '2':
+    display_quiz(q)
+    check_ans(user_ans, ans)
